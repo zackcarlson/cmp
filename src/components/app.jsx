@@ -1,11 +1,12 @@
 import { h, Component } from 'preact';
-import style from './app.less';
+// import style from './app.less';
 import { currentLocale } from '../lib/localize';
 
-import Popup from './popup/popup';
-import PopupFooter from './popup/popupFooter';
-import PopupThin from './popup/popupThin';
-import Footer from './footer/footer';
+// import Popup from './popup/popup';
+// import PopupFooter from './popup/popupFooter';
+// import PopupThin from './popup/popupThin';
+// import Footer from './footer/footer';
+import PublisherIntegration from '../docs/components/examples/pub-integration/index';
 
 export default class App extends Component {
 	state = {
@@ -130,7 +131,7 @@ export default class App extends Component {
 	componentDidMount() {
 		const { store } = this.state;
 		const { config } = this.props;
-
+		
 		if (config.css["custom-font-url"]) {
 			let head = document.head;
 			let link = document.createElement("link");
@@ -150,34 +151,43 @@ export default class App extends Component {
 		const userLocalization = config.localization[currentLocale.split('-')[0]];
 
 		return (
-			<div class={style.gdpr}>
-				<Popup
+			<div>
+				<PublisherIntegration 
 					store={store}
 					localization={userLocalization}
 					onSave={this.onSave}
 					config={config}
 					updateCSSPrefs={this.updateCSSPrefs}
 				/>
-				<PopupFooter
-					store={store}
-					localization={userLocalization}
-					onSave={this.onSave}
-					config={config}
-					updateCSSPrefs={this.updateCSSPrefs}
-				/>
-				<PopupThin
-					store={store}
-					localization={userLocalization}
-					onSave={this.onSave}
-					config={config}
-					updateCSSPrefs={this.updateCSSPrefs}
-				/>
-				<Footer
-					store={store}
-					localization={userLocalization}
-					config={config}
-					updateCSSPrefs={this.updateCSSPrefs}
-				/>
+				{/* <div class={style.gdpr}>
+					<Popup
+						store={store}
+						localization={userLocalization}
+						onSave={this.onSave}
+						config={config}
+						updateCSSPrefs={this.updateCSSPrefs}
+					/>
+					<PopupFooter
+						store={store}
+						localization={userLocalization}
+						onSave={this.onSave}
+						config={config}
+						updateCSSPrefs={this.updateCSSPrefs}
+					/>
+					<PopupThin
+						store={store}
+						localization={userLocalization}
+						onSave={this.onSave}
+						config={config}
+						updateCSSPrefs={this.updateCSSPrefs}
+					/>
+					<Footer
+						store={store}
+						localization={userLocalization}
+						config={config}
+						updateCSSPrefs={this.updateCSSPrefs}
+					/>
+				</div> */}
 			</div>
 		);
 	}
