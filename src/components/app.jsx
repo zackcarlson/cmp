@@ -7,7 +7,6 @@ import { currentLocale } from '../lib/localize';
 // import PopupThin from './popup/popupThin';
 // import Footer from './footer/footer';
 import PublisherIntegration from '../docs/components/examples/pub-integration/index';
-import Publisher from '../docs/components/examples/pub-integration/publisher';
 
 export default class App extends Component {
 	state = {
