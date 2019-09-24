@@ -45,6 +45,14 @@ export default class PublisherIntegration extends Component {
         });
     }
 
+    handleSave = () => {
+        const { onSave } = this.props;
+        onSave();
+        this.setState({ consentCookieExists: true }, () => {
+            location.reload(true);
+        })
+    }
+
     componentDidMount = () => {
         const { vendor } = navigator;
         this.setState({
@@ -56,7 +64,7 @@ export default class PublisherIntegration extends Component {
 
     render() {
         const { consentCookieExists } = this.state;
-        const { store, localization, onSave, config, updateCSSPrefs } = this.props;
+        const { store, localization, config, updateCSSPrefs } = this.props;
 
         return (
             consentCookieExists ? 
@@ -66,21 +74,21 @@ export default class PublisherIntegration extends Component {
                     <Popup
                         store={store}
                         localization={localization}
-                        onSave={onSave}
+                        onSave={this.handleSave}
                         config={config}
                         updateCSSPrefs={updateCSSPrefs}
                     />
                     <PopupFooter
                         store={store}
                         localization={localization}
-                        onSave={onSave}
+                        onSave={this.handleSave}
                         config={config}
                         updateCSSPrefs={updateCSSPrefs}
                     />
                     <PopupThin
                         store={store}
                         localization={localization}
-                        onSave={onSave}
+                        onSave={this.handleSave}
                         config={config}
                         updateCSSPrefs={updateCSSPrefs}
                     />

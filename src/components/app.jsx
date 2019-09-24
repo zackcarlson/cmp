@@ -7,6 +7,7 @@ import { currentLocale } from '../lib/localize';
 // import PopupThin from './popup/popupThin';
 // import Footer from './footer/footer';
 import PublisherIntegration from '../docs/components/examples/pub-integration/index';
+import Publisher from '../docs/components/examples/pub-integration/publisher';
 
 export default class App extends Component {
 	state = {
@@ -151,15 +152,16 @@ export default class App extends Component {
 		const userLocalization = config.localization[currentLocale.split('-')[0]];
 
 		return (
-			<div>
-				<PublisherIntegration 
-					store={store}
-					localization={userLocalization}
-					onSave={this.onSave}
-					config={config}
-					updateCSSPrefs={this.updateCSSPrefs}
-				/>
-				{/* <div class={style.gdpr}>
+				<div>
+					<PublisherIntegration 
+						store={store}
+						localization={userLocalization}
+						onSave={this.onSave}
+						config={config}
+						updateCSSPrefs={this.updateCSSPrefs}
+					/>
+				</div>
+				/* <div class={style.gdpr}>
 					<Popup
 						store={store}
 						localization={userLocalization}
@@ -187,8 +189,7 @@ export default class App extends Component {
 						config={config}
 						updateCSSPrefs={this.updateCSSPrefs}
 					/>
-				</div> */}
-			</div>
+				</div> */
 		);
 	}
 }
