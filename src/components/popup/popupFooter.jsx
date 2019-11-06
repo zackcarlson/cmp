@@ -11,8 +11,8 @@ const SECTION_DETAILS = 1;
 
 export default class PopupFooter extends Component {
 	state = {
-		selectedPanelIndex: SECTION_INTRO,
-		isActive: false
+		selectedPanelIndex: this.props.selectedPanelIndex || SECTION_INTRO,
+		isActive: this.props.isActive || false
 	};
 
 	onAcceptAll = () => {
