@@ -1,0 +1,120 @@
+@import (css) url('https://fonts.googleapis.com/css?family=Bevan&display=swap');
+@import (css) url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+nav {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+
+    header {
+        justify-content: center;
+        display: flex;
+
+        h1 {
+            font-family: 'Bevan', cursive;
+            text-transform: uppercase;
+            font-style: italic;
+        }
+    }
+    .subMenu {
+        border-top: 1px solid white;
+        
+        ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-evenly!important;
+            padding: 0;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            font-size: .8rem;
+            font-weight: 700;
+
+            li {
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                    transition: 1s;
+                }
+            }
+        }
+    }
+}
+
+main {
+    ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        align-items: center;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        flex-wrap: wrap;
+
+        h4 {
+            text-transform: uppercase;
+        }
+        
+        li, h4 {
+            margin: 1em;
+        }
+
+        li {
+            font-size: .8125rem;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+                transition: 1s;
+            }
+        }
+    }
+
+    .frontPage {
+        margin: 0 auto;
+        text-align: center;
+        cursor: pointer;
+        
+        span {
+            font-size: 8vmin;
+            text-transform: uppercase;
+            text-decoration: underline;
+            transition: 0.25s all;
+
+            &:hover {
+                text-decoration-color: orange;
+            }
+
+        }
+
+        .frontPagePhoto {
+            img {
+                width: 70%;
+                height:auto;
+            }
+        }
+    }
+
+    .consentButton {
+        position: fixed;
+        bottom: 15px;
+        right: 15px;
+        background-color: black;
+        color: #fff;
+        font-size: 13px;
+        text-transform: uppercase;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-family: 'Montserrat', sans-serif;
+        transition: 0.25s all;
+        border: none;
+
+        &:hover {
+            background-color: orange;
+            cursor: pointer;
+        }
+    }
+}
