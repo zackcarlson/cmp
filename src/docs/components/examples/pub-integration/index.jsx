@@ -1,20 +1,17 @@
 import { h, Component } from 'preact';
-import Popup from '../../../../components/popup/popup';
 import PopupFooter from '../../../../components/popup/popupFooter';
-import PopupThin from '../../../../components/popup/popupThin';
-import Footer from '../../../../components/footer/footer';
 import Publisher from './publisher.jsx';
 import style from '../../../../components/app.less';
 import { readPublisherConsentCookie } from '../../../../lib/cookie/cookie';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom'; 
 
 export default class PublisherIntegration extends Component { 
-    constructor(props) {
-        super(props);
-        this.state = {
-            consentCookieExists: false
-        }
-    }
-
     validateCookieExistence = () => {
         const result = readPublisherConsentCookie();
         return result._value ? true : false;
@@ -48,58 +45,44 @@ export default class PublisherIntegration extends Component {
     handleSave = () => {
         const { onSave } = this.props;
         onSave();
-        this.setState({ consentCookieExists: true }, () => {
-            location.reload(true);
-        })
+        setTimeout(() => window.location = '/', 250);
     }
 
     componentDidMount = () => {
         const { vendor } = navigator;
-        this.setState({
-            consentCookieExists: this.validateCookieExistence()
-        }, () => {
-            if (vendor === 'Apple Computer, Inc.') this.handleUserConsent();
-        });
+        if (vendor === 'Apple Computer, Inc.') this.handleUserConsent();
     }
 
-    render() {
-        const { consentCookieExists } = this.state;
-        const { store, localization, config, updateCSSPrefs } = this.props;
+    render(props) {
+        const { store, localization, config, updateCSSPrefs } = props;
+
+        const PrivateRoute = ({ component: Component, ...rest }) => (
+            <Route {...rest} render={(props) => (
+                this.validateCookieExistence() 
+                ? <Component {...props} />
+                : <Redirect to='/cmp' />
+            )} />
+        ) 
 
         return (
-            consentCookieExists ? 
-            <Publisher/> : 
-            (
-                <div class={style.gdpr}>
-                    <Popup
-                        store={store}
-                        localization={localization}
-                        onSave={this.handleSave}
-                        config={config}
-                        updateCSSPrefs={updateCSSPrefs}
-                    />
-                    <PopupFooter
-                        store={store}
-                        localization={localization}
-                        onSave={this.handleSave}
-                        config={config}
-                        updateCSSPrefs={updateCSSPrefs}
-                    />
-                    <PopupThin
-                        store={store}
-                        localization={localization}
-                        onSave={this.handleSave}
-                        config={config}
-                        updateCSSPrefs={updateCSSPrefs}
-                    />
-                    <Footer
-                        store={store}
-                        localization={localization}
-                        config={config}
-                        updateCSSPrefs={updateCSSPrefs}
-                    />
-                </div> 
-            )
+            <Router>
+                <Switch>
+                    <Route exact path='/cmp'>
+                        <div className={style.gdpr}>
+                            <PopupFooter
+                                store={store}
+                                localization={localization}
+                                onSave={this.handleSave}
+                                config={config}
+                                updateCSSPrefs={updateCSSPrefs}
+                                isActive={true}
+                                selectedPanelIndex={1}
+                            />
+                        </div>
+                    </Route>
+                    <PrivateRoute exact path='/' component={Publisher}/>
+                </Switch>
+            </Router>
         );
     }
 }
